@@ -22,32 +22,30 @@
   }
 
   /* V11 was designed on a fixed 1280x1000 artboard with absolute
-     positioning. tokens.css gives .art width:100% height:100%, so
-     the parent (#stage and #root) need explicit dimensions or the
-     whole layout collapses to zero height. */
+     positioning. We render at native size and always scale to the
+     viewport width, so the design holds its proportions on phones,
+     laptops, and ultra-wide monitors. tokens.css sets .art to
+     width:100% height:100%, so #stage and #root must have explicit
+     pixel dimensions or the layout collapses to zero. */
+  html, body {
+    overflow-x: hidden;
+  }
+  body {
+    /* Body height tracks the scaled artboard height. 1000/1280 = 0.78125 */
+    min-height: calc(100vw * (1000 / 1280));
+  }
   #stage {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 1280px;
     height: 1000px;
-    margin: 0 auto;
-    transform-origin: top center;
+    transform-origin: top left;
+    transform: scale(calc(100vw / 1280));
   }
   #root, #root > * {
     width: 100%;
     height: 100%;
-  }
-  /* Scale-to-fit on narrower viewports so the design holds up on
-     laptops and phones. Body height is recomputed so we don't get
-     phantom whitespace below the fold. */
-  @media (max-width: 1280px) {
-    #stage {
-      transform: scale(calc(100vw / 1280));
-    }
-    body {
-      overflow-x: hidden;
-      min-height: calc(1000px * (100vw / 1280));
-      height: calc(1000px * (100vw / 1280));
-    }
   }
 
   /* Hide the page until React + Babel finish booting so visitors
