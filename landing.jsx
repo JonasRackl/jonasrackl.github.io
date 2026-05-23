@@ -370,7 +370,7 @@ function SocialLinks({ align = 'left', marginTop = 26 }) {
             color: 'var(--ink)', textDecoration: 'underline',
             textUnderlineOffset: 4, textDecorationThickness: '1px',
             textDecorationColor: 'var(--rule)',
-          }}>{label} <span style={{ color: 'var(--ink-soft)' }}>↗</span></a>
+          }}>{label} <span style={{ color: 'var(--ink-soft)' }}>{'↗︎'}</span></a>
           {i < links.length - 1 && <span style={{ color: 'var(--ink-mute)', fontSize: 13 }}>·</span>}
         </React.Fragment>
       ))}
@@ -557,7 +557,7 @@ function LandingBauhausDisc() {
         <div style={{ display: 'flex', gap: 22, marginTop: 24, justifyContent: 'flex-end', fontFamily: 'var(--f-sans)', fontSize: 14, color: 'var(--ink)' }}>
           {['contact','google scholar','linkedin','github'].map((l, i, a) => (
             <React.Fragment key={l}>
-              <a style={{ color: 'var(--ink)', textDecoration: 'underline', textDecorationColor: 'var(--rule)', textUnderlineOffset: 4 }}>{l} <span style={{ color: 'var(--ink-soft)' }}>↗</span></a>
+              <a style={{ color: 'var(--ink)', textDecoration: 'underline', textDecorationColor: 'var(--rule)', textUnderlineOffset: 4 }}>{l} <span style={{ color: 'var(--ink-soft)' }}>{'↗︎'}</span></a>
               {i < a.length - 1 && <span style={{ color: 'var(--ink-mute)' }}>·</span>}
             </React.Fragment>
           ))}
@@ -944,7 +944,7 @@ function LandingMassiveWord() {
         <div style={{ display: 'flex', gap: 18, fontFamily: 'var(--f-sans)', fontSize: 13, color: 'var(--ink-soft)' }}>
           {['google scholar','linkedin','github'].map((l, i, a) => (
             <React.Fragment key={l}>
-              <a style={{ color: 'var(--ink-soft)', textDecoration: 'none' }}>{l} <span>↗</span></a>
+              <a style={{ color: 'var(--ink-soft)', textDecoration: 'none' }}>{l} <span>{'↗︎'}</span></a>
               {i < a.length - 1 && <span style={{ color: 'var(--ink-mute)' }}>·</span>}
             </React.Fragment>
           ))}
