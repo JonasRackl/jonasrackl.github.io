@@ -209,12 +209,13 @@ const CAT_DATA = [
     n: '02', k: 'Projects',
     subs: ['instruments', 'ventures', 'builds'],
     items: [
-      { sub: 'builds',      title: 'Free Food Finder — find free food on campus, faster', meta: 'web + mobile · launching · freefoodfinder.app' },
-      { sub: 'instruments', title: 'Floret — a spectrum browser',  meta: 'open source · v0.4' },
-      { sub: 'instruments', title: 'Maquette — synthesis notebook', meta: 'in build' },
-      { sub: 'ventures',    title: 'Atelier No.7 — micro-brand',    meta: 'planning' },
+      { sub: 'builds',      title: 'Free Food Finder — campus food, fast', meta: 'web + mobile · launching', href: 'https://freefoodfinder.app' },
+      { sub: 'instruments', title: 'ETHos — a photoreactor',         meta: 'open source · published',   href: 'https://onlinelibrary.wiley.com/doi/10.1002/hlca.202400154' },
+      { sub: 'instruments', title: 'Floret — a spectrum browser',    meta: 'open source · v0.4' },
+      { sub: 'instruments', title: 'Maquette — synthesis notebook',  meta: 'in build' },
+      { sub: 'ventures',    title: 'Atelier No.7 — micro-brand',     meta: 'planning' },
       { sub: 'ventures',    title: 'Long table — supper-club series', meta: 'archived' },
-      { sub: 'builds',      title: 'Wickerbench — column rig',      meta: '2023 · archive' },
+      { sub: 'builds',      title: 'Wickerbench — column rig',       meta: '2023 · archive' },
     ],
   },
   {
@@ -310,14 +311,29 @@ function CategoryIndexInteractive({ onOpenChange }) {
                 ))}
               </div>
 
-              <div className="cat-preview" style={{ fontStyle: 'italic', color: 'var(--ink-soft)' }}>{preview.title}</div>
+              <div className="cat-preview" style={{ fontStyle: 'italic', color: 'var(--ink-soft)' }}>
+                {preview.href ? (
+                  <a href={preview.href} target="_blank" rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    style={{ color: 'inherit', textDecoration: 'underline', textUnderlineOffset: 3, textDecorationColor: 'var(--rule)' }}>
+                    {preview.title}
+                  </a>
+                ) : preview.title}
+              </div>
               <div className="cat-preview-meta">{preview.meta}</div>
 
               <div className="cat-drawer">
                 <div className="cat-drawer-inner">
                   {list.map((it) => (
                     <div key={it.title} className="cat-item" onClick={(e) => e.stopPropagation()}>
-                      <div className="cat-item-title" style={{ fontStyle: 'italic', color: 'var(--ink-soft)' }}>{it.title}</div>
+                      <div className="cat-item-title" style={{ fontStyle: 'italic', color: 'var(--ink-soft)' }}>
+                        {it.href ? (
+                          <a href={it.href} target="_blank" rel="noopener noreferrer"
+                            style={{ color: 'inherit', textDecoration: 'underline', textUnderlineOffset: 3, textDecorationColor: 'var(--rule)' }}>
+                            {it.title}
+                          </a>
+                        ) : it.title}
+                      </div>
                       <div className="cat-item-sub">{it.sub} · {it.meta}</div>
                     </div>
                   ))}

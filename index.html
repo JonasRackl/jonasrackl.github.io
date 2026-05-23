@@ -349,6 +349,15 @@
     color: var(--ink-soft, #5b544a);
     text-transform: uppercase;
   }
+  /* Card titles that are hyperlinks (e.g. Free Food Finder, ETHos). */
+  #mobile-view .m-card-entry a,
+  #mobile-view .m-card-item-title a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
   #mobile-view .m-footer {
     margin-top: 40px;
     padding-top: 18px;
@@ -467,10 +476,14 @@
         <span class="m-card-chevron" aria-hidden="true"></span>
       </div>
       <div class="m-card-tags">instruments · ventures · builds</div>
-      <div class="m-card-entry">Free Food Finder — find free food on campus, faster</div>
-      <div class="m-card-meta">web + mobile · launching · freefoodfinder.app</div>
+      <div class="m-card-entry"><a href="https://freefoodfinder.app" target="_blank" rel="noopener noreferrer">Free Food Finder — campus food, fast</a></div>
+      <div class="m-card-meta">web + mobile · launching</div>
     </summary>
     <div class="m-card-drawer">
+      <div class="m-card-item">
+        <div class="m-card-item-title"><a href="https://onlinelibrary.wiley.com/doi/10.1002/hlca.202400154" target="_blank" rel="noopener noreferrer">ETHos — a photoreactor</a></div>
+        <div class="m-card-item-sub">instruments · open source · published</div>
+      </div>
       <div class="m-card-item">
         <div class="m-card-item-title">Floret — a spectrum browser</div>
         <div class="m-card-item-sub">instruments · open source · v0.4</div>
@@ -603,10 +616,10 @@
         {/* ── Decorative orb cluster, anchored upper-right ─────────── */}
         <div className="v11-fade" style={{
           position: 'absolute',
-          top: 'clamp(40px, 6vh, 130px)',
+          top: 'clamp(36px, 5vmin, 120px)',
           right: 0,
-          width: 'min(60vw, 920px)',
-          height: 'min(72vh, 640px)',
+          width: 'min(58vw, 880px)',
+          height: 'min(62vh, 580px)',
           pointerEvents: 'none',
           zIndex: 1,
           overflow: 'visible',
@@ -614,9 +627,9 @@
           <div style={{
             position: 'absolute',
             top: 0,
-            right: '-3vw',
+            right: '-2vw',
             transformOrigin: 'top right',
-            transform: 'scale(calc(min(60vw, 920px) / 900))',
+            transform: 'scale(calc(min(58vw, 880px) / 900))',
           }}>
             <OrbCluster top={0} left={0} right={0} scale={1.0} grainOpacity={0.7} animate />
           </div>
@@ -628,7 +641,7 @@
           display: 'flex',
           alignItems: 'center',
           gap: 24,
-          padding: 'clamp(14px, 1.6vh, 22px) clamp(20px, 4vw, 80px)',
+          padding: 'clamp(12px, 1.4vmin, 22px) clamp(22px, 4vw, 80px)',
           borderBottom: '1px solid var(--rule)',
           fontFamily: 'var(--f-mono)',
           fontSize: 11,
@@ -650,7 +663,7 @@
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          padding: 'clamp(36px, 6vh, 90px) clamp(20px, 4vw, 80px) clamp(20px, 3vh, 40px)',
+          padding: 'clamp(28px, 5vmin, 80px) clamp(22px, 4vw, 80px) clamp(14px, 2vmin, 32px)',
           position: 'relative',
           zIndex: 3,
           minHeight: 0,
@@ -658,31 +671,31 @@
           <div>
             <div style={{
               fontFamily: 'var(--f-mono)',
-              fontSize: 'clamp(10px, 0.78vw, 12px)',
+              fontSize: 'clamp(10px, 1vmin, 12px)',
               letterSpacing: '0.14em',
               textTransform: 'uppercase',
               color: 'var(--ink-soft)',
-              marginBottom: 'clamp(14px, 1.6vh, 22px)',
+              marginBottom: 'clamp(12px, 1.4vmin, 22px)',
             }}>— a working notebook</div>
 
             <h1 style={{
               margin: 0,
               fontFamily: '"Newsreader", "Source Serif", Georgia, serif',
               fontWeight: 500,
-              fontSize: 'clamp(44px, 5.6vw, 100px)',
+              fontSize: 'clamp(40px, 7vmin, 96px)',
               lineHeight: 0.96,
               letterSpacing: '-0.022em',
               color: 'var(--ink)',
             }}>Hullo! I'm Jonas.</h1>
 
             <div style={{
-              marginTop: 'clamp(22px, 2.6vh, 36px)',
-              maxWidth: 'clamp(420px, 50vw, 660px)',
+              marginTop: 'clamp(18px, 2.2vmin, 34px)',
+              maxWidth: 'clamp(420px, 52vmin, 660px)',
             }}>
               <p style={{
                 margin: 0,
                 fontFamily: 'var(--f-sans)',
-                fontSize: 'clamp(15px, 1.18vw, 19px)',
+                fontSize: 'clamp(15px, 1.65vmin, 19px)',
                 lineHeight: 1.55,
                 color: 'var(--ink)',
                 textWrap: 'pretty',
@@ -690,9 +703,9 @@
                 I'm a chemist trained in organic chemistry at <a href="https://www.tum.de/en/" target="_blank" rel="noopener noreferrer" style={linkStyle}>TUM</a>, <a href="https://sarponggroup.com" target="_blank" rel="noopener noreferrer" style={linkStyle}>UC Berkeley</a>, and <a href="https://wennemers.ethz.ch" target="_blank" rel="noopener noreferrer" style={linkStyle}>ETH Zürich</a>, <span style={sideBodyStyle}>now joining <a href="https://chemistry.mit.edu" target="_blank" rel="noopener noreferrer" style={linkStyle}>MIT</a> as a Postdoctoral Associate in the <a href="https://raineslab.com" target="_blank" rel="noopener noreferrer" style={linkStyle}>Raines group</a> to dive into RNA chemistry, chemical biology and enzymology.</span>
               </p>
               <p style={{
-                margin: '14px 0 0',
+                margin: '12px 0 0',
                 fontFamily: 'var(--f-sans)',
-                fontSize: 'clamp(15px, 1.18vw, 19px)',
+                fontSize: 'clamp(15px, 1.65vmin, 19px)',
                 lineHeight: 1.55,
                 color: 'var(--ink-soft)',
                 textWrap: 'pretty',
@@ -706,7 +719,8 @@
           <div style={{
             display: 'flex',
             justifyContent: 'flex-end',
-            paddingTop: 'clamp(24px, 4vh, 60px)',
+            flexWrap: 'wrap',
+            paddingTop: 'clamp(16px, 3vmin, 50px)',
           }}>
             <SocialLinks marginTop={0} align="right"/>
           </div>
@@ -715,7 +729,7 @@
         {/* ── Category index ──────────────────────────────────────── */}
         <div className="v11-index-pad" style={{
           flex: '0 0 auto',
-          padding: '0 clamp(20px, 4vw, 80px) clamp(16px, 2vh, 28px)',
+          padding: '0 clamp(22px, 4vw, 80px) clamp(10px, 1.5vmin, 24px)',
           position: 'relative',
           zIndex: 3,
         }}>
@@ -727,7 +741,7 @@
           flex: '0 0 auto',
           display: 'flex',
           justifyContent: 'space-between',
-          padding: 'clamp(10px, 1.4vh, 20px) clamp(20px, 4vw, 80px) clamp(14px, 1.8vh, 24px)',
+          padding: 'clamp(8px, 1.2vmin, 18px) clamp(22px, 4vw, 80px) clamp(10px, 1.5vmin, 22px)',
           position: 'relative',
           zIndex: 3,
         }}>
