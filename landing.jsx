@@ -207,12 +207,12 @@ const CAT_DATA = [
   },
   {
     n: '02', k: 'Projects',
-    subs: ['instruments', 'ventures', 'builds'],
+    subs: ['hardware', 'ventures', 'builds'],
     items: [
-      { sub: 'builds',      title: 'Free Food Finder — campus food, fast', meta: '2026 · launching',     href: 'https://freefoodfinder.app' },
-      { sub: 'instruments', title: 'ETHos — a photoreactor',               meta: '2024 · open source',  href: 'https://onlinelibrary.wiley.com/doi/10.1002/hlca.202400154' },
-      { sub: 'ventures',    title: 'Atelier No.7 — micro-brand',           meta: 'planning' },
-      { sub: 'ventures',    title: 'Long table — supper-club series',      meta: 'archived' },
+      { sub: 'builds',   title: 'Free Food Finder — campus food, fast', meta: '2026 · launching',     href: 'https://freefoodfinder.app' },
+      { sub: 'hardware', title: 'ETHos — a photoreactor',               meta: '2024 · open source',  href: 'https://onlinelibrary.wiley.com/doi/10.1002/hlca.202400154' },
+      { sub: 'ventures', title: 'Atelier No.7 — micro-brand',           meta: 'planning' },
+      { sub: 'ventures', title: 'Long table — supper-club series',      meta: 'archived' },
     ],
   },
   {
