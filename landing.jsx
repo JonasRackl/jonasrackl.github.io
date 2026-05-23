@@ -209,6 +209,7 @@ const CAT_DATA = [
     n: '02', k: 'Projects',
     subs: ['instruments', 'ventures', 'builds'],
     items: [
+      { sub: 'builds',      title: 'Free Food Finder — find free food on campus, faster', meta: 'web + mobile · launching · freefoodfinder.app' },
       { sub: 'instruments', title: 'Floret — a spectrum browser',  meta: 'open source · v0.4' },
       { sub: 'instruments', title: 'Maquette — synthesis notebook', meta: 'in build' },
       { sub: 'ventures',    title: 'Atelier No.7 — micro-brand',    meta: 'planning' },
