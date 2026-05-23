@@ -211,8 +211,7 @@ const CAT_DATA = [
     items: [
       { sub: 'builds',   title: 'Free Food Finder — campus food, fast', meta: '2026 · launching',     href: 'https://freefoodfinder.app' },
       { sub: 'hardware', title: 'ETHos — a photoreactor',               meta: '2024 · open source',  href: 'https://onlinelibrary.wiley.com/doi/10.1002/hlca.202400154', extraLink: { label: 'blueprints', href: 'https://github.com/JWR-ETH/ETHos-ETH-Open-Source-Photoreactor' } },
-      { sub: 'ventures', title: 'Atelier No.7 — micro-brand',           meta: 'planning' },
-      { sub: 'ventures', title: 'Long table — supper-club series',      meta: 'archived' },
+      { sub: 'ventures', title: 'stealth — micro-brand',                meta: 'planning' },
     ],
   },
   {
