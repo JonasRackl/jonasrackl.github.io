@@ -124,23 +124,94 @@
     text-underline-offset: 3px;
     text-decoration-thickness: 1px;
   }
+  #mobile-view .m-bio-muted,
+  #mobile-view .m-bio .m-bio-muted {
+    color: var(--ink-soft, #5b544a);
+  }
+  /* Drift animation on the orb cluster. Each orb gets its own path so
+     the cluster feels organic, not like a rigid carousel. Amplitude
+     ~24-32px — big enough to be clearly visible on a phone screen
+     without overwhelming the typography below. */
+  @keyframes m-orb-drift-1 {
+    0%, 100% { transform: translate(0, 0); }
+    33%      { transform: translate(-18px, -14px); }
+    66%      { transform: translate(10px, -22px); }
+  }
+  @keyframes m-orb-drift-2 {
+    0%, 100% { transform: translate(0, 0); }
+    25%      { transform: translate(20px,  12px); }
+    50%      { transform: translate(28px, -10px); }
+    75%      { transform: translate( 8px,  18px); }
+  }
+  @keyframes m-orb-drift-3 {
+    0%, 100% { transform: translate(0, 0); }
+    50%      { transform: translate(-26px, 16px); }
+  }
+  @keyframes m-orb-drift-4 {
+    0%, 100% { transform: translate(0, 0); }
+    40%      { transform: translate(22px, -18px); }
+    80%      { transform: translate(-12px, -8px); }
+  }
+  @keyframes m-orb-drift-5 {
+    0%, 100% { transform: translate(0, 0); }
+    50%      { transform: translate(18px,  24px); }
+  }
+  #mobile-view .m-orb.o1 { animation: m-orb-drift-1 16s ease-in-out infinite; }
+  #mobile-view .m-orb.o2 { animation: m-orb-drift-2 22s ease-in-out infinite -4s; }
+  #mobile-view .m-orb.o3 { animation: m-orb-drift-3 18s ease-in-out infinite -7s; }
+  #mobile-view .m-orb.o4 { animation: m-orb-drift-4 20s ease-in-out infinite -2s; }
+  #mobile-view .m-orb.o5 { animation: m-orb-drift-5 24s ease-in-out infinite -9s; }
+  @media (prefers-reduced-motion: reduce) {
+    #mobile-view .m-orb { animation: none; }
+  }
   #mobile-view .m-orbs {
     position: relative;
     width: 100%;
-    height: 220px;
+    height: 240px;
     margin: 36px 0 8px;
   }
+  /* Each orb is a wrapper (does the drift) holding an inner element
+     (does the radial gradient + blur). Splitting these two transforms
+     keeps iOS Safari from rasterising the blurred element once and
+     freezing the motion. */
   #mobile-view .m-orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(14px);
-    opacity: 0.88;
+    will-change: transform;
   }
-  #mobile-view .m-orb.o1 { width: 130px; height: 130px; left: 12%; top: 8%;  background: var(--c-rust); }
-  #mobile-view .m-orb.o2 { width: 110px; height: 110px; left: 38%; top: 34%; background: var(--c-indigo); opacity: 0.78; }
-  #mobile-view .m-orb.o3 { width:  78px; height:  78px; left: 64%; top: 18%; background: var(--c-dusk); opacity: 0.72; }
-  #mobile-view .m-orb.o4 { width:  64px; height:  64px; left: 58%; top: 60%; background: var(--c-amber); opacity: 0.85; }
-  #mobile-view .m-orb.o5 { width:  46px; height:  46px; left: 22%; top: 64%; background: var(--c-sage); opacity: 0.65; }
+  #mobile-view .m-orb::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    filter: blur(14px);
+    transform: translateZ(0);
+  }
+  #mobile-view .m-orb.o1 { width: 150px; height: 150px; left: 10%; top: 4%;  opacity: 0.92; }
+  #mobile-view .m-orb.o1::before {
+    background: radial-gradient(circle at 50% 50%,
+      #dde7ed 0%, #9bb6c8 32%, #6a8aa4 55%, transparent 82%);
+  }
+  #mobile-view .m-orb.o2 { width: 132px; height: 132px; left: 40%; top: 28%; opacity: 0.92; }
+  #mobile-view .m-orb.o2::before {
+    background: radial-gradient(circle at 50% 50%,
+      #f6dac6 0%, #ec9572 34%, #cf5a3e 58%, transparent 82%);
+  }
+  #mobile-view .m-orb.o3 { width:  90px; height:  90px; left: 66%; top: 10%; opacity: 0.82; }
+  #mobile-view .m-orb.o3::before {
+    background: radial-gradient(circle at 50% 50%,
+      #e4d4e4 0%, #a48ab8 38%, transparent 78%);
+  }
+  #mobile-view .m-orb.o4 { width: 100px; height: 100px; left: 58%; top: 54%; opacity: 0.88; }
+  #mobile-view .m-orb.o4::before {
+    background: radial-gradient(circle at 50% 50%,
+      #f4e2b6 0%, #e29a48 36%, #b86a2e 58%, transparent 82%);
+  }
+  #mobile-view .m-orb.o5 { width:  68px; height:  68px; left: 24%; top: 60%; opacity: 0.78; }
+  #mobile-view .m-orb.o5::before {
+    background: radial-gradient(circle at 50% 50%,
+      #dde2cc 0%, #94a682 40%, transparent 78%);
+  }
   #mobile-view .m-links {
     display: flex;
     flex-wrap: wrap;
@@ -155,10 +226,6 @@
     text-decoration: none;
     border-bottom: 1px solid rgba(26, 22, 18, 0.45);
     padding-bottom: 2px;
-  }
-  #mobile-view .m-links a::after {
-    content: " ↗";
-    color: var(--ink-soft, #5b544a);
   }
   #mobile-view .m-section-label {
     font-family: var(--f-mono);
@@ -262,15 +329,16 @@
 
   <p class="m-bio">
     I'm a chemist trained in organic chemistry at
-    <a href="https://www.ch.tum.de/" rel="noopener">TUM</a>,
-    <a href="https://chemistry.berkeley.edu/" rel="noopener">UC Berkeley</a>,
-    and <a href="https://chab.ethz.ch/" rel="noopener">ETH Zürich</a>,
-    now joining <a href="https://chemistry.mit.edu/" rel="noopener">MIT</a>
+    <a href="https://www.tum.de/en/" target="_blank" rel="noopener noreferrer">TUM</a>,
+    <a href="https://sarponggroup.com" target="_blank" rel="noopener noreferrer">UC Berkeley</a>,
+    and <a href="https://wennemers.ethz.ch" target="_blank" rel="noopener noreferrer">ETH Zürich</a>,
+    <span class="m-bio-muted">now joining
+    <a href="https://chemistry.mit.edu" target="_blank" rel="noopener noreferrer">MIT</a>
     as a Postdoctoral Associate in the
-    <a href="https://raineslab.mit.edu/" rel="noopener">Raines group</a>
-    to dive into RNA chemistry, chemical biology and enzymology.
+    <a href="https://raineslab.com" target="_blank" rel="noopener noreferrer">Raines group</a>
+    to dive into RNA chemistry, chemical biology and enzymology.</span>
   </p>
-  <p class="m-bio">
+  <p class="m-bio m-bio-muted">
     Outside the lab, my attention goes to film, photography, literature,
     and the arts more broadly, to running long distances, and to thinking
     elsewhere.
@@ -278,9 +346,9 @@
 
   <div class="m-links">
     <a href="mailto:contact@jonasrackl.com">contact</a>
-    <a href="https://scholar.google.com/" rel="noopener">google scholar</a>
-    <a href="https://www.linkedin.com/in/jonasrackl/" rel="noopener">linkedin</a>
-    <a href="https://github.com/JonasRackl" rel="noopener">github</a>
+    <a href="https://scholar.google.com/citations?user=8X8ceckAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener noreferrer">google scholar</a>
+    <a href="https://www.linkedin.com/in/jonasrackl/" target="_blank" rel="noopener noreferrer">linkedin</a>
+    <a href="https://github.com/JonasRackl" target="_blank" rel="noopener noreferrer">github</a>
   </div>
 
   <div class="m-section-label">— placeholder entries · site in build</div>
