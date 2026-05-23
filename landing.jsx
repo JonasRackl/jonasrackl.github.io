@@ -209,13 +209,10 @@ const CAT_DATA = [
     n: '02', k: 'Projects',
     subs: ['instruments', 'ventures', 'builds'],
     items: [
-      { sub: 'builds',      title: 'Free Food Finder — campus food, fast', meta: 'web + mobile · launching', href: 'https://freefoodfinder.app' },
-      { sub: 'instruments', title: 'ETHos — a photoreactor',         meta: 'open source · published',   href: 'https://onlinelibrary.wiley.com/doi/10.1002/hlca.202400154' },
-      { sub: 'instruments', title: 'Floret — a spectrum browser',    meta: 'open source · v0.4' },
-      { sub: 'instruments', title: 'Maquette — synthesis notebook',  meta: 'in build' },
-      { sub: 'ventures',    title: 'Atelier No.7 — micro-brand',     meta: 'planning' },
-      { sub: 'ventures',    title: 'Long table — supper-club series', meta: 'archived' },
-      { sub: 'builds',      title: 'Wickerbench — column rig',       meta: '2023 · archive' },
+      { sub: 'builds',      title: 'Free Food Finder — campus food, fast', meta: '2026 · launching',     href: 'https://freefoodfinder.app' },
+      { sub: 'instruments', title: 'ETHos — a photoreactor',               meta: '2024 · open source',  href: 'https://onlinelibrary.wiley.com/doi/10.1002/hlca.202400154' },
+      { sub: 'ventures',    title: 'Atelier No.7 — micro-brand',           meta: 'planning' },
+      { sub: 'ventures',    title: 'Long table — supper-club series',      meta: 'archived' },
     ],
   },
   {
