@@ -349,9 +349,11 @@
     color: var(--ink-soft, #5b544a);
     text-transform: uppercase;
   }
-  /* Card titles that are hyperlinks (e.g. Free Food Finder, ETHos). */
+  /* Card titles + inline meta links (e.g. Free Food Finder, ETHos,
+     and the ETHos blueprints link in the meta row). */
   #mobile-view .m-card-entry a,
-  #mobile-view .m-card-item-title a {
+  #mobile-view .m-card-item-title a,
+  #mobile-view .m-card-item-sub a {
     color: inherit;
     text-decoration: underline;
     text-decoration-color: var(--rule);
@@ -482,7 +484,7 @@
     <div class="m-card-drawer">
       <div class="m-card-item">
         <div class="m-card-item-title"><a href="https://onlinelibrary.wiley.com/doi/10.1002/hlca.202400154" target="_blank" rel="noopener noreferrer">ETHos — a photoreactor</a></div>
-        <div class="m-card-item-sub">hardware · 2024 · open source</div>
+        <div class="m-card-item-sub">hardware · 2024 · open source · <a href="https://github.com/JWR-ETH/ETHos-ETH-Open-Source-Photoreactor" target="_blank" rel="noopener noreferrer">blueprints</a></div>
       </div>
       <div class="m-card-item">
         <div class="m-card-item-title">Atelier No.7 — micro-brand</div>

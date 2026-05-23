@@ -210,7 +210,7 @@ const CAT_DATA = [
     subs: ['hardware', 'ventures', 'builds'],
     items: [
       { sub: 'builds',   title: 'Free Food Finder — campus food, fast', meta: '2026 · launching',     href: 'https://freefoodfinder.app' },
-      { sub: 'hardware', title: 'ETHos — a photoreactor',               meta: '2024 · open source',  href: 'https://onlinelibrary.wiley.com/doi/10.1002/hlca.202400154' },
+      { sub: 'hardware', title: 'ETHos — a photoreactor',               meta: '2024 · open source',  href: 'https://onlinelibrary.wiley.com/doi/10.1002/hlca.202400154', extraLink: { label: 'blueprints', href: 'https://github.com/JWR-ETH/ETHos-ETH-Open-Source-Photoreactor' } },
       { sub: 'ventures', title: 'Atelier No.7 — micro-brand',           meta: 'planning' },
       { sub: 'ventures', title: 'Long table — supper-club series',      meta: 'archived' },
     ],
@@ -317,7 +317,16 @@ function CategoryIndexInteractive({ onOpenChange }) {
                   </a>
                 ) : preview.title}
               </div>
-              <div className="cat-preview-meta">{preview.meta}</div>
+              <div className="cat-preview-meta">
+                {preview.meta}
+                {preview.extraLink && (
+                  <>{' · '}<a href={preview.extraLink.href} target="_blank" rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    style={{ color: 'inherit', textDecoration: 'underline', textDecorationColor: 'var(--rule)', textUnderlineOffset: 3 }}>
+                    {preview.extraLink.label}
+                  </a></>
+                )}
+              </div>
 
               <div className="cat-drawer">
                 <div className="cat-drawer-inner">
@@ -331,7 +340,15 @@ function CategoryIndexInteractive({ onOpenChange }) {
                           </a>
                         ) : it.title}
                       </div>
-                      <div className="cat-item-sub">{it.sub} · {it.meta}</div>
+                      <div className="cat-item-sub">
+                        {it.sub} · {it.meta}
+                        {it.extraLink && (
+                          <>{' · '}<a href={it.extraLink.href} target="_blank" rel="noopener noreferrer"
+                            style={{ color: 'inherit', textDecoration: 'underline', textDecorationColor: 'var(--rule)', textUnderlineOffset: 3 }}>
+                            {it.extraLink.label}
+                          </a></>
+                        )}
+                      </div>
                     </div>
                   ))}
                   {list.length === 0 && (
