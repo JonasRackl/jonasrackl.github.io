@@ -1731,4 +1731,4 @@ function AicherTile({ bg, label, name, children }) {
   );
 }
 
-Object.assign(window, { LandingEditorial, LandingPoster, LandingGallery, LandingBauhausDisc, LandingBauhausTriptych, LandingGradientField, LandingMassiveWord, LandingHelloFigure, LandingAtelierGreeting, LandingFullBleedAtelier, LandingMinimalGrain, LandingContentsGrid, LandingWinkler, LandingCasey, LandingAicher });
+Object.assign(window, { LandingEditorial, LandingPoster, LandingGallery, LandingBauhausDisc, LandingBauhausTriptych, LandingGradientField, LandingMassiveWord, LandingHelloFigure, LandingAtelierGreeting, LandingFullBleedAtelier, LandingMinimalGrain, LandingContentsGrid, LandingWinkler, LandingCasey, LandingAicher, Orb, OrbCluster, Masthead, SocialLinks, CategoryIndexInteractive, FooterMinimal });
