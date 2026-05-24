@@ -228,16 +228,23 @@ image-slot {
 }
 
 /* ── interactive category index ── click-to-expand drawer.
-   Uses CSS grid-template-rows transition from 0fr → 1fr to animate
-   open/close height smoothly without measuring content. The inner
-   <div class="cat-drawer-inner"> is overflow:hidden + min-height:0 so
-   the row collapses cleanly when closed. ── */
+   ──────────────────────────────────────────────────────────────
+   ANIMATION SYSTEM. Everything that moves when a category opens,
+   closes, dims, or is hovered shares ONE duration and ONE easing
+   curve so the whole motion reads as a single gesture instead of
+   several overlapping transitions of different lengths. To retune
+   the entire animation feel, change just the two values below. ── */
+:root {
+  --cat-dur: 420ms;
+  --cat-ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 /* dim siblings smoothly too */
 .cat {
   cursor: pointer;
   border-top: 1px solid transparent;
   padding-top: 0;
-  transition: opacity 480ms cubic-bezier(0.22,1,0.36,1);
+  transition: opacity var(--cat-dur) var(--cat-ease);
 }
 .cat-row { display: contents; }
 .cat.is-dim { opacity: 0.18; }
@@ -291,22 +298,23 @@ image-slot {
 .cat-sub-sep { color: var(--ink-mute); }
 .cat.is-open .cat-sub-sep { display: none; }
 
-/* Closed-state peek list — three slim rows hinting that each
-   category contains multiple items. Collapses via the same
-   grid-template-rows 1fr → 0fr trick the drawer uses, so the
-   transition reads as one continuous height change rather than a
-   snap-followed-by-fade. */
+/* ── Closed-state peek ──
+   Hidden by default; appears only when hovering or keyboard-focusing
+   a closed category. Uses the grid-rows 0fr↔1fr trick so the height
+   animates cleanly and the layout reflows without snap. */
 .cat-peek-wrap {
   display: grid;
-  grid-template-rows: 1fr;
-  opacity: 1;
-  transition: grid-template-rows 540ms cubic-bezier(0.22, 1, 0.36, 1),
-              opacity            320ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-.cat.is-open .cat-peek-wrap {
   grid-template-rows: 0fr;
   opacity: 0;
   pointer-events: none;
+  transition: grid-template-rows var(--cat-dur) var(--cat-ease),
+              opacity            var(--cat-dur) var(--cat-ease);
+}
+.cat:not(.is-open):hover .cat-peek-wrap,
+.cat:not(.is-open):focus-within .cat-peek-wrap {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  pointer-events: auto;
 }
 .cat-peek {
   overflow: hidden;
@@ -314,21 +322,15 @@ image-slot {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  padding-top: 4px;
   font-family: 'Newsreader', Georgia, serif;
   font-style: italic;
   font-size: 15px;
   line-height: 1.4;
   color: var(--ink-soft);
 }
-.cat-peek-item {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-}
-.cat-peek-bullet {
-  color: var(--ink-mute);
-  font-style: normal;
-}
+.cat-peek-item { display: flex; align-items: baseline; gap: 8px; }
+.cat-peek-bullet { color: var(--ink-mute); font-style: normal; }
 .cat-peek-title { flex: 1; }
 .cat-peek-more {
   font-family: var(--f-mono);
@@ -344,36 +346,36 @@ image-slot {
    markup elsewhere on the site degrades gracefully. */
 .cat-preview, .cat-preview-meta { display: none; }
 
-/* the drawer itself — the grid-template-rows 0fr → 1fr trick.
-   Slightly longer arc + same easing as the peek collapse so the
-   peek shrinking and the drawer growing read as one motion. */
+/* ── Drawer ──
+   Same duration + easing as the peek so when you click a category
+   the peek shrinking and the drawer growing land at the same
+   moment, reading as one motion. */
 .cat-drawer {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 620ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: grid-template-rows var(--cat-dur) var(--cat-ease);
 }
 .cat.is-open .cat-drawer { grid-template-rows: 1fr; }
 .cat-drawer-inner { overflow: hidden; min-height: 0; }
 
+/* ── Drawer items ──
+   No per-item stagger — staggering made the drawer feel like it
+   stopped and the items dribbled in afterwards. Now all items fade
+   in together, slightly delayed so they appear right as the drawer
+   is finishing its expansion. */
 .cat-item {
   display: grid; grid-template-columns: 1fr auto;
   gap: 16px; align-items: baseline;
   padding: 8px 0;
   border-top: 1px solid var(--rule-soft);
-  opacity: 0; transform: translateY(6px);
-  transition: opacity 420ms cubic-bezier(0.22, 1, 0.36, 1),
-              transform 460ms cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 0;
+  transition: opacity var(--cat-dur) var(--cat-ease);
 }
 .cat-item:first-child { border-top: 1px solid var(--rule); margin-top: 2px; }
-.cat.is-open .cat-item { opacity: 1; transform: none; }
-/* Tighter stagger (50ms steps starting at 140ms) so items finish
-   landing close to when the drawer finishes opening — no dribble. */
-.cat.is-open .cat-item:nth-child(1) { transition-delay: 140ms; }
-.cat.is-open .cat-item:nth-child(2) { transition-delay: 190ms; }
-.cat.is-open .cat-item:nth-child(3) { transition-delay: 240ms; }
-.cat.is-open .cat-item:nth-child(4) { transition-delay: 290ms; }
-.cat.is-open .cat-item:nth-child(5) { transition-delay: 340ms; }
-.cat.is-open .cat-item:nth-child(6) { transition-delay: 390ms; }
+.cat.is-open .cat-item {
+  opacity: 1;
+  transition-delay: calc(var(--cat-dur) * 0.45);
+}
 
 .cat-item-title { font-size: 15px; color: var(--ink); line-height: 1.4; }
 .cat-item-sub {
@@ -402,8 +404,8 @@ image-slot {
    hero's vertical space and the two read on top of each other.
    Driven by data-cat-open="true" set by the React component. —— */
 .art-v11 .v11-fade {
-  transition: opacity 520ms cubic-bezier(0.22,1,0.36,1),
-              transform 560ms cubic-bezier(0.22,1,0.36,1);
+  transition: opacity var(--cat-dur) var(--cat-ease),
+              transform var(--cat-dur) var(--cat-ease);
 }
 .art-v11[data-cat-open="true"] .v11-fade {
   opacity: 0;
@@ -415,9 +417,9 @@ image-slot {
    drawer items have a solid surface to sit on — nothing bleeds
    through from behind. Driven by the same data-cat-open hook. */
 .art-v11 .v11-index-pad {
-  transition: background 480ms cubic-bezier(0.22,1,0.36,1),
-              box-shadow 480ms cubic-bezier(0.22,1,0.36,1),
-              padding 480ms cubic-bezier(0.22,1,0.36,1);
+  transition: background var(--cat-dur) var(--cat-ease),
+              box-shadow var(--cat-dur) var(--cat-ease),
+              padding var(--cat-dur) var(--cat-ease);
   padding: 0;
   background: transparent;
 }
