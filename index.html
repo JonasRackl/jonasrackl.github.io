@@ -324,6 +324,44 @@
     font-size: 11px;
     color: var(--ink-soft, #5b544a);
   }
+  /* Closed-state peek list — three short rows so each card visibly
+     advertises a collection instead of one hero entry. Hidden when
+     the card is open (the drawer below shows the full list). */
+  #mobile-view .m-card-peek {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: "Newsreader", Georgia, serif;
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.4;
+    color: var(--ink-soft, #5b544a);
+  }
+  #mobile-view .m-card-peek li {
+    position: relative;
+    padding-left: 14px;
+  }
+  #mobile-view .m-card-peek li::before {
+    content: "·";
+    position: absolute;
+    left: 2px;
+    top: -1px;
+    font-style: normal;
+    color: var(--ink-mute, #8a8378);
+  }
+  #mobile-view .m-card-peek-more {
+    margin-top: 10px;
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute, #8a8378);
+  }
+  #mobile-view .m-card[open] .m-card-peek,
+  #mobile-view .m-card[open] .m-card-peek-more { display: none; }
   #mobile-view .m-card-drawer {
     padding: 4px 0 24px;
     margin-top: 4px;
@@ -445,10 +483,18 @@
         <span class="m-card-chevron" aria-hidden="true"></span>
       </div>
       <div class="m-card-tags">science · essays · notes</div>
-      <div class="m-card-entry">On the half-life of a good question</div>
-      <div class="m-card-meta">2026 · in build</div>
+      <ul class="m-card-peek">
+        <li>On the half-life of a good question</li>
+        <li>Three pivots, in chemistry</li>
+        <li>What an instrument wants to be</li>
+      </ul>
+      <div class="m-card-peek-more">+ 2 more</div>
     </summary>
     <div class="m-card-drawer">
+      <div class="m-card-item">
+        <div class="m-card-item-title">On the half-life of a good question</div>
+        <div class="m-card-item-sub">science · 2026 · in build</div>
+      </div>
       <div class="m-card-item">
         <div class="m-card-item-title">Three pivots, in chemistry</div>
         <div class="m-card-item-sub">science · 2025 · 9 min</div>
@@ -478,10 +524,17 @@
         <span class="m-card-chevron" aria-hidden="true"></span>
       </div>
       <div class="m-card-tags">hardware · ventures · builds</div>
-      <div class="m-card-entry"><a href="https://freefoodfinder.app" target="_blank" rel="noopener noreferrer">Free Food Finder — campus food, fast</a></div>
-      <div class="m-card-meta">2026 · launching</div>
+      <ul class="m-card-peek">
+        <li>Free Food Finder — campus food, fast</li>
+        <li>ETHos — a photoreactor</li>
+        <li>stealth — micro-brand</li>
+      </ul>
     </summary>
     <div class="m-card-drawer">
+      <div class="m-card-item">
+        <div class="m-card-item-title"><a href="https://freefoodfinder.app" target="_blank" rel="noopener noreferrer">Free Food Finder — campus food, fast</a></div>
+        <div class="m-card-item-sub">builds · 2026 · launching</div>
+      </div>
       <div class="m-card-item">
         <div class="m-card-item-title"><a href="https://onlinelibrary.wiley.com/doi/10.1002/hlca.202400154" target="_blank" rel="noopener noreferrer">ETHos — a photoreactor</a></div>
         <div class="m-card-item-sub">hardware · 2024 · open source · <a href="https://github.com/JWR-ETH/ETHos-ETH-Open-Source-Photoreactor" target="_blank" rel="noopener noreferrer">blueprints</a></div>
@@ -503,10 +556,18 @@
         <span class="m-card-chevron" aria-hidden="true"></span>
       </div>
       <div class="m-card-tags">photographs · short film</div>
-      <div class="m-card-entry">Charles river, in fog</div>
-      <div class="m-card-meta">2026 · 12 frames</div>
+      <ul class="m-card-peek">
+        <li>Charles river, in fog</li>
+        <li>Glassware, after hours</li>
+        <li>Calla lilies</li>
+      </ul>
+      <div class="m-card-peek-more">+ 2 more</div>
     </summary>
     <div class="m-card-drawer">
+      <div class="m-card-item">
+        <div class="m-card-item-title">Charles river, in fog</div>
+        <div class="m-card-item-sub">photographs · 2026 · 12 frames</div>
+      </div>
       <div class="m-card-item">
         <div class="m-card-item-title">Glassware, after hours</div>
         <div class="m-card-item-sub">photographs · 2025 · 8 frames</div>

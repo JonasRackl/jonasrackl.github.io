@@ -307,24 +307,24 @@ function CategoryIndexInteractive({ onOpenChange }) {
                 ))}
               </div>
 
-              <div className="cat-preview" style={{ fontStyle: 'italic', color: 'var(--ink-soft)' }}>
-                {preview.href ? (
-                  <a href={preview.href} target="_blank" rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    style={{ color: 'inherit', textDecoration: 'underline', textUnderlineOffset: 3, textDecorationColor: 'var(--rule)' }}>
-                    {preview.title}
-                  </a>
-                ) : preview.title}
-              </div>
-              <div className="cat-preview-meta">
-                {preview.meta}
-                {preview.extraLink && (
-                  <>{' · '}<a href={preview.extraLink.href} target="_blank" rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    style={{ color: 'inherit', textDecoration: 'underline', textDecorationColor: 'var(--rule)', textUnderlineOffset: 3 }}>
-                    {preview.extraLink.label}
-                  </a></>
-                )}
+              {/* Closed-state peek: three slim rows so the category reads
+                  as a multi-item collection, not a single hero entry. The
+                  wrapper uses the grid-rows 1fr→0fr trick so it collapses
+                  smoothly when the drawer expands below. Titles are not
+                  links here — clicking inside the peek opens the drawer
+                  where the same items appear with their real hrefs. */}
+              <div className="cat-peek-wrap" aria-hidden={isOpen ? 'true' : 'false'}>
+                <div className="cat-peek">
+                  {items.slice(0, 3).map((it) => (
+                    <div key={it.title} className="cat-peek-item">
+                      <span className="cat-peek-bullet" aria-hidden="true">·</span>
+                      <span className="cat-peek-title">{it.title}</span>
+                    </div>
+                  ))}
+                  {items.length > 3 && (
+                    <div className="cat-peek-more">+ {items.length - 3} more</div>
+                  )}
+                </div>
               </div>
 
               <div className="cat-drawer">

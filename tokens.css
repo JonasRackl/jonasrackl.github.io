@@ -291,27 +291,66 @@ image-slot {
 .cat-sub-sep { color: var(--ink-mute); }
 .cat.is-open .cat-sub-sep { display: none; }
 
-/* the preview line (the single 'latest' row) cross-fades with drawer */
-.cat-preview {
-  font-size: 16px; line-height: 1.45; color: var(--ink); margin-bottom: 4px;
-  transition: opacity 360ms cubic-bezier(0.22,1,0.36,1), transform 480ms cubic-bezier(0.22,1,0.36,1);
+/* Closed-state peek list — three slim rows hinting that each
+   category contains multiple items. Collapses via the same
+   grid-template-rows 1fr → 0fr trick the drawer uses, so the
+   transition reads as one continuous height change rather than a
+   snap-followed-by-fade. */
+.cat-peek-wrap {
+  display: grid;
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transition: grid-template-rows 540ms cubic-bezier(0.22, 1, 0.36, 1),
+              opacity            320ms cubic-bezier(0.22, 1, 0.36, 1);
 }
-.cat-preview-meta {
-  font-family: var(--f-mono); font-size: 11px;
-  letter-spacing: 0.06em; text-transform: lowercase;
+.cat.is-open .cat-peek-wrap {
+  grid-template-rows: 0fr;
+  opacity: 0;
+  pointer-events: none;
+}
+.cat-peek {
+  overflow: hidden;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-family: 'Newsreader', Georgia, serif;
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.4;
   color: var(--ink-soft);
-  transition: opacity 360ms cubic-bezier(0.22,1,0.36,1);
 }
-.cat.is-open .cat-preview,
-.cat.is-open .cat-preview-meta { opacity: 0; transform: translateY(-4px); pointer-events: none; height: 0; margin: 0; overflow: hidden; }
+.cat-peek-item {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.cat-peek-bullet {
+  color: var(--ink-mute);
+  font-style: normal;
+}
+.cat-peek-title { flex: 1; }
+.cat-peek-more {
+  font-family: var(--f-mono);
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+  color: var(--ink-mute);
+  margin-top: 8px;
+}
+
+/* Legacy single-line preview classes — kept as no-ops so any older
+   markup elsewhere on the site degrades gracefully. */
+.cat-preview, .cat-preview-meta { display: none; }
 
 /* the drawer itself — the grid-template-rows 0fr → 1fr trick.
-   Smoother, softer easing on a longer arc — reads as a paper slide,
-   not a UI snap. */
+   Slightly longer arc + same easing as the peek collapse so the
+   peek shrinking and the drawer growing read as one motion. */
 .cat-drawer {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 560ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: grid-template-rows 620ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 .cat.is-open .cat-drawer { grid-template-rows: 1fr; }
 .cat-drawer-inner { overflow: hidden; min-height: 0; }
@@ -321,18 +360,20 @@ image-slot {
   gap: 16px; align-items: baseline;
   padding: 8px 0;
   border-top: 1px solid var(--rule-soft);
-  opacity: 0; transform: translateY(8px);
-  transition: opacity 480ms cubic-bezier(0.22, 1, 0.36, 1),
-              transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 0; transform: translateY(6px);
+  transition: opacity 420ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 460ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 .cat-item:first-child { border-top: 1px solid var(--rule); margin-top: 2px; }
 .cat.is-open .cat-item { opacity: 1; transform: none; }
-.cat.is-open .cat-item:nth-child(1) { transition-delay:  80ms; }
-.cat.is-open .cat-item:nth-child(2) { transition-delay: 150ms; }
-.cat.is-open .cat-item:nth-child(3) { transition-delay: 220ms; }
+/* Tighter stagger (50ms steps starting at 140ms) so items finish
+   landing close to when the drawer finishes opening — no dribble. */
+.cat.is-open .cat-item:nth-child(1) { transition-delay: 140ms; }
+.cat.is-open .cat-item:nth-child(2) { transition-delay: 190ms; }
+.cat.is-open .cat-item:nth-child(3) { transition-delay: 240ms; }
 .cat.is-open .cat-item:nth-child(4) { transition-delay: 290ms; }
-.cat.is-open .cat-item:nth-child(5) { transition-delay: 360ms; }
-.cat.is-open .cat-item:nth-child(6) { transition-delay: 430ms; }
+.cat.is-open .cat-item:nth-child(5) { transition-delay: 340ms; }
+.cat.is-open .cat-item:nth-child(6) { transition-delay: 390ms; }
 
 .cat-item-title { font-size: 15px; color: var(--ink); line-height: 1.4; }
 .cat-item-sub {
